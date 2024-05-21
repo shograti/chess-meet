@@ -1,11 +1,14 @@
+import { Link } from "react-router-dom";
 import { Navigation } from "./navigation";
 
 export const Header = () => {
   return (
     <div className="bg-neutral-900 text-white">
-      <div className="mx-auto w-full max-w-screen-xl px-2.5 md:px-20">
-        <div className="flex items-center justify-between py-4">
-          <h1 className="text-2xl font-bold">Chess Meet</h1>
+      <div className="mx-auto w-full max-w-screen-xl md:px-20 px-5">
+        <div className="flex items-center justify-between py-4 flex-wrap gap-2">
+          <Link to="/">
+            <h1 className="text-2xl font-bold">Chess Meet</h1>
+          </Link>
           <Navigation />
         </div>
       </div>
