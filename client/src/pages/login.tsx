@@ -1,10 +1,9 @@
 import MaxWidthWrapper from "@/components/max-width-wrapper";
 
-export const Home = () => {
-
+export const Login = () => {
   return (
     <MaxWidthWrapper>
-      <div className="mt-6">Home</div>
+      <div className="mt-6">Login</div>
     </MaxWidthWrapper>
   );
 };
