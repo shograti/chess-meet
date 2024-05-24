@@ -1,5 +1,5 @@
 // src/providers/Providers.tsx
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { ThemeProvider } from "./theme-provider";
 
 // Additional providers can be imported and added here

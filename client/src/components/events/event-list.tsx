@@ -11,7 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Button, buttonVariants } from "../ui/button";
+import { Button } from "../ui/button";
 import { TEvent } from "./types";
 import { Star, X } from "lucide-react";
 

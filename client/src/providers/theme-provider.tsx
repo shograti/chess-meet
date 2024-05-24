@@ -1,5 +1,4 @@
-// src/context/ThemeContext.tsx
-import React, {
+import {
   createContext,
   useContext,
   useEffect,
