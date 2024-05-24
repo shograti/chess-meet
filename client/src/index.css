@@ -50,6 +50,9 @@
   }
 }
 
+::placeholder{
+  font-style: italic;
+}
 
   @layer base {
     * {
