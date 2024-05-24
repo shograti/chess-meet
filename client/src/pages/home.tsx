@@ -1,9 +1,11 @@
+import { CreateEventSheet } from "@/components/events/create-event-sheet";
 import { EventList } from "@/components/events/event-list";
 import { Map } from "@/components/map";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 
@@ -67,9 +69,14 @@ export const Home = () => {
         <Label className="text-xl">Events</Label>
         <div className="flex gap-4 items-center mt-1.5">
           <Input className="" placeholder="Search anything..." />
-          <Button variant="secondary" className="self-center font-bold">
-            Create Event
-          </Button>
+          <Sheet>
+            <SheetTrigger>
+              <Button variant="secondary" className="self-center font-bold">
+                Create Event
+              </Button>
+            </SheetTrigger>
+            <CreateEventSheet />
+          </Sheet>
         </div>
       </div>
       <div className="mt-6">
