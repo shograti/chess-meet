@@ -1,5 +1,5 @@
-
-  export interface Event {
+export interface TEvent {
+    id: string;
     title: string;
     description: string;
     date: string;

@@ -1,5 +1,4 @@
 import { EventList } from "@/components/events/event-list";
-import { Event } from "@/components/events/types";
 import { Map } from "@/components/map";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
 import { Button } from "@/components/ui/button";
@@ -8,8 +7,9 @@ import { Label } from "@/components/ui/label";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 
-const events: Event[] = [
+const events = [
   {
+    id: "1",
     title: "Chess Tournament",
     description: "Join our annual chess tournament and showcase your skills!",
     date: "15/02/2022",
@@ -17,6 +17,7 @@ const events: Event[] = [
     fullAddress: "123 Main St, Anytown, USA",
   },
   {
+    id: "2",
     title: "Chess Workshop",
     description: "Learn advanced chess strategies from Grandmaster John Doe.",
     date: "10/03/2022",
@@ -24,6 +25,7 @@ const events: Event[] = [
     fullAddress: "456 Elm St, Somewhere, USA",
   },
   {
+    id: "3",
     title: "Chess Club Meeting",
     description: "Discuss chess tactics and play friendly matches.",
     date: "25/03/2022",
@@ -31,6 +33,7 @@ const events: Event[] = [
     fullAddress: "789 Oak Ave, Nowhere, USA",
   },
   {
+    id: "4",
     title: "Chess Simultaneous Exhibition",
     description: "Challenge the chess master in a simultaneous exhibition.",
     date: "05/04/2022",
@@ -38,6 +41,7 @@ const events: Event[] = [
     fullAddress: "321 Pine Rd, Anytown, USA",
   },
   {
+    id: "5",
     title: "Chess Strategy Workshop",
     description: "Improve your chess strategy with expert guidance.",
     date: "20/04/2022",
@@ -45,6 +49,7 @@ const events: Event[] = [
     fullAddress: "654 Cedar Ln, Somewhere, USA",
   },
   {
+    id: "6",
     title: "Chess Blitz Tournament",
     description: "Test your speed chess skills in a fast-paced tournament.",
     date: "30/04/2022",
