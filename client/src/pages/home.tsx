@@ -19,6 +19,8 @@ const events = [
     dateTime: new Date(),
     fullAddress: "123 Main St, Anytown, USA",
     participants: 0,
+    gamePace: "No time control (Casual)",
+    areBoardAndPiecesProvided: false,
     createdAt: new Date("2022-09-01T12:00:00"),
   },
   {
@@ -28,6 +30,9 @@ const events = [
     dateTime: new Date(),
     fullAddress: "456 Elm St, Somewhere, USA",
     participants: 8,
+    gamePace: "10+5 (Rapid)",
+    areBoardAndPiecesProvided: true,
+    cashPrize: 120000,
     createdAt: new Date("2022-09-01T12:00:00"),
   },
   {
@@ -37,6 +42,8 @@ const events = [
     dateTime: new Date(),
     fullAddress: "789 Oak Ave, Nowhere, USA",
     participants: 8,
+    gamePace: "10+5 (Rapid)",
+    areBoardAndPiecesProvided: true,
     createdAt: new Date("2022-09-01T12:00:00"),
   },
   {
@@ -46,6 +53,8 @@ const events = [
     dateTime: new Date(),
     fullAddress: "321 Pine Rd, Anytown, USA",
     participants: 8,
+    gamePace: "10+5 (Rapid)",
+    areBoardAndPiecesProvided: true,
     createdAt: new Date("2022-08-01T12:00:00"),
   },
   {
@@ -55,6 +64,8 @@ const events = [
     dateTime: new Date("2022-02-15T10:00:00"),
     fullAddress: "654 Cedar Ln, Somewhere, USA",
     participants: 8,
+    gamePace: "10+5 (Rapid)",
+    areBoardAndPiecesProvided: true,
     createdAt: new Date("2022-09-01T12:00:00"),
   },
   {
@@ -64,6 +75,8 @@ const events = [
     dateTime: new Date(),
     fullAddress: "987 Maple Dr, Nowhere, USA",
     participants: 8,
+    gamePace: "10+5 (Rapid)",
+    areBoardAndPiecesProvided: true,
     createdAt: new Date("2022-09-01T12:00:00"),
   },
 ];

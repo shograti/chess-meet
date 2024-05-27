@@ -12,7 +12,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Button } from "../ui/button";
-import { Star, X } from "lucide-react";
+import { Blocks, Clock, Euro, Star, X } from "lucide-react";
 import { format } from "date-fns";
 
 export interface TEvent {
@@ -22,6 +22,9 @@ export interface TEvent {
   dateTime: Date;
   fullAddress: string;
   participants: number;
+  gamePace: string;
+  areBoardAndPiecesProvided: boolean;
+  cashPrize?: number | null;
 }
 
 interface EventListProps {
@@ -46,7 +49,7 @@ const EventItem: React.FC<EventItemProps> = ({ event }) => {
   return (
     <Card className="rounded-md">
       <CardHeader>
-        <div className=" flex justify-between items-start">
+        <div className="flex justify-between items-start">
           <div className="flex flex-col gap-1">
             <CardTitle className="flex items-start flex-wrap gap-2 md:flex-row flex-col">
               {event.title}{" "}
@@ -85,14 +88,62 @@ const EventItem: React.FC<EventItemProps> = ({ event }) => {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="flex sm:flex-row flex-col justify-between  sm:gap-2 gap-4">
-          <div className="flex gap-2 sm:self-end font-semibold text-xs">
-            <span>{format(event.dateTime, "dd/MM/yyyy 'at' HH:mm")}</span>
-            <span className="text-yellow-500 cursor-pointer hover:text-yellow-400">
-              {event.fullAddress}
-            </span>
+        <div className="flex sm:flex-row flex-col justify-between sm:gap-2 gap-4">
+          <div className="flex flex-col gap-4 items-start">
+            <div className="flex flex-col items-start gap-2 sm:gap-4 flex-wrap border-2 rounded-lg p-2">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <div className="text-sm flex items-center gap-1">
+                      <Clock className="h-4 w-4" />
+                      {event.gamePace}
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Game pace</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <div className="text-sm flex items-center gap-1">
+                      <Blocks className="h-4 w-4" />
+                      {event.areBoardAndPiecesProvided
+                        ? "Board and pieces provided"
+                        : "Bring your own board and pieces"}
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Do I have to bring my own board ?</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+              {event.cashPrize ? (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <div className="text-sm flex items-center gap-1">
+                        <Euro className="h-4 w-4" />
+                        {event.cashPrize / 100} cashprize
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Cashprize</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              ) : null}
+            </div>
+
+            <div className="flex gap-2 font-semibold text-xs">
+              <span>{format(event.dateTime, "dd/MM/yyyy 'at' HH:mm")}</span>
+              <span className="text-yellow-500 cursor-pointer hover:text-yellow-400">
+                {event.fullAddress}
+              </span>
+            </div>
           </div>
-          <Button className="font-semibold self-stretch xs:self-end">
+          <Button className="font-semibold self-stretch sm:self-end">
             Join event
           </Button>
         </div>
