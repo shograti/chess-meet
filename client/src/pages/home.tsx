@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 import { useMemo, useState } from "react";
 
 const events = [
@@ -62,7 +62,7 @@ const events = [
 ];
 
 export const Home = () => {
-  const [isMapVisible, setIsMapVisible] = useState(true);
+  const [isMapVisible, setIsMapVisible] = useState(false);
   const [areEventsVisible, setAreEventsVisible] = useState(true);
   const [sortMethod, setSortMethod] = useState("most-recent");
 
@@ -102,7 +102,11 @@ export const Home = () => {
             className="flex gap-2 items-center text-xl cursor-pointer"
             onClick={() => setAreEventsVisible((prev) => !prev)}
           >
-            Latest events {areEventsVisible ? <ChevronUp /> : <ChevronDown />}{" "}
+            Latest events{" "}
+            <Switch
+              defaultChecked={true}
+              onCheckedChange={(e) => setAreEventsVisible(e)}
+            />
           </h2>
           <EventSelect onSortChange={setSortMethod} />
         </div>
@@ -116,7 +120,10 @@ export const Home = () => {
         >
           <span>Map</span>
 
-          {isMapVisible ? <ChevronUp /> : <ChevronDown />}
+          <Switch
+            defaultChecked={false}
+            onCheckedChange={(e) => setIsMapVisible(e)}
+          />
         </h2>
         {isMapVisible && <Map />}
       </div>
