@@ -56,7 +56,9 @@ const EventItem: React.FC<EventItemProps> = ({ event }) => {
                   : "Become the first participant by joining the event !"}
               </span>
             </CardTitle>
-            <CardDescription>{event.description}</CardDescription>
+            <CardDescription className="mt-1">
+              {event.description}
+            </CardDescription>
           </div>
           <div className="flex items-center gap-4">
             <TooltipProvider>
@@ -83,14 +85,16 @@ const EventItem: React.FC<EventItemProps> = ({ event }) => {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="flex justify-between items-center gap-2">
-          <div className="flex gap-2 self-end font-semibold text-xs text-center">
+        <div className="flex sm:flex-row flex-col justify-between  sm:gap-2 gap-4">
+          <div className="flex gap-2 sm:self-end font-semibold text-xs">
             <span>{format(event.dateTime, "dd/MM/yyyy 'at' HH:mm")}</span>
             <span className="text-yellow-500 cursor-pointer hover:text-yellow-400">
               {event.fullAddress}
             </span>
           </div>
-          <Button className="font-semibold">Join event</Button>
+          <Button className="font-semibold self-stretch xs:self-end">
+            Join event
+          </Button>
         </div>
       </CardContent>
     </Card>

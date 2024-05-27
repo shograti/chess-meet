@@ -17,6 +17,7 @@ export const EventSelect: React.FC<EventSelectProps> = ({ onSortChange }) => {
         <SelectValue placeholder="Sort by" />
       </SelectTrigger>
       <SelectContent>
+        <SelectItem value="closest-in-time">Closest in time</SelectItem>
         <SelectItem value="most-recent">Most recent</SelectItem>
         <SelectItem value="most-popular">Most popular</SelectItem>
         <SelectItem value="name">Name</SelectItem>

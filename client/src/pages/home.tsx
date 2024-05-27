@@ -14,10 +14,12 @@ const events = [
   {
     id: "1",
     title: "Chess Tournament",
-    description: "Join our annual chess tournament and showcase your skills!",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget vestibulum urna. Sed consequat gravida neque, eget luctus lectus dignissim et. Nullam eget sapien sed ligula vulputate pharetra in quis ex. Sed elementum ligula a lorem dignissim rhoncus. Vivamus non felis diam. Fusce pulvinar ac mauris a malesuada. Vestibulum laoreet purus ac mattis pretium. Fusce placerat lorem augue, sed auctor elit consectetur ac. Donec id varius purus. Suspendisse feugiat laoreet efficitur. In porttitor consequat fermentum. Morbi faucibus venenatis ex, id ultricies dolor luctus eget. Aliquam odio erat biam. ",
     dateTime: new Date(),
     fullAddress: "123 Main St, Anytown, USA",
     participants: 0,
+    createdAt: new Date("2022-09-01T12:00:00"),
   },
   {
     id: "2",
@@ -26,6 +28,7 @@ const events = [
     dateTime: new Date(),
     fullAddress: "456 Elm St, Somewhere, USA",
     participants: 8,
+    createdAt: new Date("2022-09-01T12:00:00"),
   },
   {
     id: "3",
@@ -34,6 +37,7 @@ const events = [
     dateTime: new Date(),
     fullAddress: "789 Oak Ave, Nowhere, USA",
     participants: 8,
+    createdAt: new Date("2022-09-01T12:00:00"),
   },
   {
     id: "4",
@@ -42,6 +46,7 @@ const events = [
     dateTime: new Date(),
     fullAddress: "321 Pine Rd, Anytown, USA",
     participants: 8,
+    createdAt: new Date("2022-08-01T12:00:00"),
   },
   {
     id: "5",
@@ -50,6 +55,7 @@ const events = [
     dateTime: new Date("2022-02-15T10:00:00"),
     fullAddress: "654 Cedar Ln, Somewhere, USA",
     participants: 8,
+    createdAt: new Date("2022-09-01T12:00:00"),
   },
   {
     id: "6",
@@ -58,6 +64,7 @@ const events = [
     dateTime: new Date(),
     fullAddress: "987 Maple Dr, Nowhere, USA",
     participants: 8,
+    createdAt: new Date("2022-09-01T12:00:00"),
   },
 ];
 
@@ -66,15 +73,23 @@ export const Home = () => {
   const [areEventsVisible, setAreEventsVisible] = useState(true);
   const [sortMethod, setSortMethod] = useState("most-recent");
 
+  const now: any = new Date();
+
   const sortedEvents = useMemo(() => {
-    const eventsCopy = [...events]; //
+    const eventsCopy = [...events];
     switch (sortMethod) {
       case "most-recent":
-        return eventsCopy.sort((a: any, b: any) => b.dateTime - a.dateTime);
+        return eventsCopy.sort((a: any, b: any) => b.createdAt - a.createdAt);
       case "most-popular":
         return eventsCopy.sort((a, b) => b.participants - a.participants);
       case "name":
         return eventsCopy.sort((a, b) => a.title.localeCompare(b.title));
+      case "closest-in-time":
+        return eventsCopy.sort((a: any, b: any) => {
+          const distanceA = Math.abs(a.dateTime - now);
+          const distanceB = Math.abs(b.dateTime - now);
+          return distanceA - distanceB;
+        });
       default:
         return eventsCopy;
     }
