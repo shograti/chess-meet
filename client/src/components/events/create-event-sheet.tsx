@@ -8,7 +8,7 @@ import { CreateEventForm } from "./create-event-form";
 
 export const CreateEventSheet = () => {
   return (
-    <SheetContent>
+    <SheetContent className="z-[9999]">
       <SheetHeader>
         <SheetTitle className="text-2xl">Create a chess event</SheetTitle>
         <SheetDescription>

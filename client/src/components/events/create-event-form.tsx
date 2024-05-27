@@ -15,9 +15,9 @@ export const CreateEventForm = () => {
       <div className="flex flex-col gap-2">
         <Label>Description</Label>
         <Textarea
-          maxLength={200}
+          maxLength={600}
           rows={6}
-          placeholder="Write a short description with a maximum of 200 characters"
+          placeholder="Write a description with a maximum of 600 characters"
         />
       </div>
       <div className="flex flex-col gap-2">

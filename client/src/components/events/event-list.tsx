@@ -12,8 +12,17 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Button } from "../ui/button";
-import { TEvent } from "./types";
 import { Star, X } from "lucide-react";
+import { format } from "date-fns";
+
+export interface TEvent {
+  id: string;
+  title: string;
+  description: string;
+  dateTime: Date;
+  fullAddress: string;
+  participants: number;
+}
 
 interface EventListProps {
   events: TEvent[];
@@ -39,7 +48,14 @@ const EventItem: React.FC<EventItemProps> = ({ event }) => {
       <CardHeader>
         <div className=" flex justify-between items-start">
           <div className="flex flex-col gap-1">
-            <CardTitle>{event.title}</CardTitle>
+            <CardTitle className="flex items-start flex-wrap gap-2 md:flex-row flex-col">
+              {event.title}{" "}
+              <span className="text-xs font-light uppercase text-yellow-500">
+                {event.participants
+                  ? event.participants + " participant(s)"
+                  : "Become the first participant by joining the event !"}
+              </span>
+            </CardTitle>
             <CardDescription>{event.description}</CardDescription>
           </div>
           <div className="flex items-center gap-4">
@@ -69,9 +85,7 @@ const EventItem: React.FC<EventItemProps> = ({ event }) => {
       <CardContent>
         <div className="flex justify-between items-center gap-2">
           <div className="flex gap-2 self-end font-semibold text-xs text-center">
-            <span>
-              {event.date} at {event.time}
-            </span>
+            <span>{format(event.dateTime, "dd/MM/yyyy 'at' HH:mm")}</span>
             <span className="text-yellow-500 cursor-pointer hover:text-yellow-400">
               {event.fullAddress}
             </span>

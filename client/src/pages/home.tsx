@@ -1,5 +1,6 @@
 import { CreateEventSheet } from "@/components/events/create-event-sheet";
 import { EventList } from "@/components/events/event-list";
+import { EventSelect } from "@/components/events/event-select";
 import { Map } from "@/components/map";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
 import { Button } from "@/components/ui/button";
@@ -7,62 +8,78 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 const events = [
   {
     id: "1",
     title: "Chess Tournament",
     description: "Join our annual chess tournament and showcase your skills!",
-    date: "15/02/2022",
-    time: "10:00 - 18:00",
+    dateTime: new Date(),
     fullAddress: "123 Main St, Anytown, USA",
+    participants: 0,
   },
   {
     id: "2",
     title: "Chess Workshop",
     description: "Learn advanced chess strategies from Grandmaster John Doe.",
-    date: "10/03/2022",
-    time: "14:00 - 16:00",
+    dateTime: new Date(),
     fullAddress: "456 Elm St, Somewhere, USA",
+    participants: 8,
   },
   {
     id: "3",
     title: "Chess Club Meeting",
     description: "Discuss chess tactics and play friendly matches.",
-    date: "25/03/2022",
-    time: "19:00 - 21:00",
+    dateTime: new Date(),
     fullAddress: "789 Oak Ave, Nowhere, USA",
+    participants: 8,
   },
   {
     id: "4",
     title: "Chess Simultaneous Exhibition",
     description: "Challenge the chess master in a simultaneous exhibition.",
-    date: "05/04/2022",
-    time: "16:00 - 18:00",
+    dateTime: new Date(),
     fullAddress: "321 Pine Rd, Anytown, USA",
+    participants: 8,
   },
   {
     id: "5",
     title: "Chess Strategy Workshop",
     description: "Improve your chess strategy with expert guidance.",
-    date: "20/04/2022",
-    time: "10:00 - 12:00",
+    dateTime: new Date("2022-02-15T10:00:00"),
     fullAddress: "654 Cedar Ln, Somewhere, USA",
+    participants: 8,
   },
   {
     id: "6",
     title: "Chess Blitz Tournament",
     description: "Test your speed chess skills in a fast-paced tournament.",
-    date: "30/04/2022",
-    time: "13:00 - 17:00",
+    dateTime: new Date(),
     fullAddress: "987 Maple Dr, Nowhere, USA",
+    participants: 8,
   },
 ];
 
 export const Home = () => {
   const [isMapVisible, setIsMapVisible] = useState(true);
   const [areEventsVisible, setAreEventsVisible] = useState(true);
+  const [sortMethod, setSortMethod] = useState("most-recent");
+
+  const sortedEvents = useMemo(() => {
+    const eventsCopy = [...events]; //
+    switch (sortMethod) {
+      case "most-recent":
+        return eventsCopy.sort((a: any, b: any) => b.dateTime - a.dateTime);
+      case "most-popular":
+        return eventsCopy.sort((a, b) => b.participants - a.participants);
+      case "name":
+        return eventsCopy.sort((a, b) => a.title.localeCompare(b.title));
+      default:
+        return eventsCopy;
+    }
+  }, [sortMethod]);
+
   return (
     <MaxWidthWrapper>
       <div className="mt-6 flex flex-col ">
@@ -80,13 +97,17 @@ export const Home = () => {
         </div>
       </div>
       <div className="mt-6">
-        <h2
-          className="flex gap-2 items-center text-xl cursor-pointer"
-          onClick={() => setAreEventsVisible((prev) => !prev)}
-        >
-          Latest events {areEventsVisible ? <ChevronUp /> : <ChevronDown />}{" "}
-        </h2>
-        {areEventsVisible && <EventList events={events} />}
+        <div className="flex items-center justify-between">
+          <h2
+            className="flex gap-2 items-center text-xl cursor-pointer"
+            onClick={() => setAreEventsVisible((prev) => !prev)}
+          >
+            Latest events {areEventsVisible ? <ChevronUp /> : <ChevronDown />}{" "}
+          </h2>
+          <EventSelect onSortChange={setSortMethod} />
+        </div>
+
+        {areEventsVisible && <EventList events={sortedEvents} />}
       </div>
       <div className="mt-6">
         <h2
