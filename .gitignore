@@ -2,4 +2,3 @@ node_modules
 .env
 .env.production
 .env.development
-ormconfig.json
