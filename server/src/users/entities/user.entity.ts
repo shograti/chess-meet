@@ -5,7 +5,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   Unique,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
+import * as bcrypt from 'bcrypt';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 @Unique('UQ_USER_EMAIL', ['email'])
@@ -20,8 +24,18 @@ export class User {
   @Column()
   username: string;
 
-  @Column()
+  @Exclude()
+  @Column({ select: false })
   password: string;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  async hashPassword() {
+    if (this.password) {
+      const salt = await bcrypt.genSalt();
+      this.password = await bcrypt.hash(this.password, salt);
+    }
+  }
 
   @CreateDateColumn()
   createdAt: Date;

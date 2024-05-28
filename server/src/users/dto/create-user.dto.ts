@@ -3,7 +3,6 @@ import {
   IsNotEmpty,
   IsString,
   Length,
-  isNotEmpty,
 } from 'class-validator';
 
 export class CreateUserDto {

@@ -13,6 +13,7 @@ exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("typeorm");
 const user_entity_1 = require("./entities/user.entity");
+const common_2 = require("@nestjs/common");
 let UsersService = class UsersService {
     constructor(entityManager) {
         this.entityManager = entityManager;
@@ -21,9 +22,11 @@ let UsersService = class UsersService {
         try {
             const newUser = this.entityManager.create(user_entity_1.User, createUserDto);
             await this.entityManager.save(user_entity_1.User, newUser);
+            newUser.password = undefined;
             return newUser;
         }
         catch (error) {
+            common_2.Logger.error(error);
             if (error.code === 'ER_DUP_ENTRY') {
                 if (error.message.includes('UQ_USER_EMAIL')) {
                     throw new common_1.ConflictException('Email already exists.');
@@ -35,11 +38,28 @@ let UsersService = class UsersService {
             throw new common_1.InternalServerErrorException('Internal server error. Please try again later.');
         }
     }
+    async findOneByEmailOrUsername(emailOrUsername) {
+        return await this.entityManager
+            .createQueryBuilder(user_entity_1.User, 'user')
+            .where('user.email = :emailOrUsername OR user.username = :emailOrUsername', { emailOrUsername })
+            .addSelect('user.password')
+            .getOne();
+    }
     findAll() {
         return `This action returns all users`;
     }
     findOne(id) {
-        return `This action returns a #${id} user`;
+        return `This action returns a user`;
+    }
+    async getProfile(id) {
+        const user = await this.entityManager.findOne(user_entity_1.User, {
+            where: { id: id },
+        });
+        if (!user) {
+            throw new common_1.NotFoundException('User not found.');
+        }
+        const { password, ...userWithoutPassword } = user;
+        return userWithoutPassword;
     }
     update(id, updateUserDto) {
         return `This action updates a #${id} user`;

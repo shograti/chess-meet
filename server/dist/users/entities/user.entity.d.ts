@@ -3,6 +3,7 @@ export declare class User {
     email: string;
     username: string;
     password: string;
+    hashPassword(): Promise<void>;
     createdAt: Date;
     updatedAt: Date;
 }
