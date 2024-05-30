@@ -9,7 +9,12 @@ const dotenv = require("dotenv");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     dotenv.config();
-    app.enableCors();
+    app.enableCors({
+        origin: 'http://localhost:5173',
+        credentials: true,
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        allowedHeaders: 'Content-Type, Accept',
+    });
     app.use(cookieParser());
     app.useGlobalPipes(new common_1.ValidationPipe({
         whitelist: true,

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Navigation } from "./navigation";
+import { Navigation } from "./navigation/navigation";
 
 export const Header = () => {
   return (

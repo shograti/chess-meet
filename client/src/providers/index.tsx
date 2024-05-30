@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { ThemeProvider } from "./theme-provider";
+import { ReactQueryProvider } from "./react-query-provider";
 
 interface ProvidersProps {
   children: ReactNode;
@@ -7,9 +8,9 @@ interface ProvidersProps {
 
 const Providers = ({ children }: ProvidersProps) => {
   return (
-    <ThemeProvider>
-      {children}
-    </ThemeProvider>
+    <ReactQueryProvider>
+      <ThemeProvider>{children}</ThemeProvider>
+    </ReactQueryProvider>
   );
 };
 
