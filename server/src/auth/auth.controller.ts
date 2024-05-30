@@ -1,4 +1,11 @@
-import { Controller, Post, Body, Res, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Res,
+  HttpStatus,
+  Logger,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Response } from 'express';
 import { SignInDto } from './dto/sign-in.dto';
@@ -25,10 +32,25 @@ export class AuthController {
 
       response.status(HttpStatus.OK).send();
     } catch (error) {
-      console.log(error);
+      Logger.log(error);
       response
         .status(HttpStatus.UNAUTHORIZED)
         .json({ message: 'Invalid credentials.' });
     }
+  }
+
+  @Post('logout')
+  async logout(@Res() response: Response) {
+    response.cookie('Authentication', '', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+      sameSite: 'strict',
+      expires: new Date(0),
+    });
+
+    response
+      .status(HttpStatus.OK)
+      .send({ message: 'Logged out successfully.' });
   }
 }

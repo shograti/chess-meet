@@ -33,11 +33,23 @@ let AuthController = class AuthController {
             response.status(common_1.HttpStatus.OK).send();
         }
         catch (error) {
-            console.log(error);
+            common_1.Logger.log(error);
             response
                 .status(common_1.HttpStatus.UNAUTHORIZED)
                 .json({ message: 'Invalid credentials.' });
         }
+    }
+    async logout(response) {
+        response.cookie('Authentication', '', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            path: '/',
+            sameSite: 'strict',
+            expires: new Date(0),
+        });
+        response
+            .status(common_1.HttpStatus.OK)
+            .send({ message: 'Logged out successfully.' });
     }
 };
 exports.AuthController = AuthController;
@@ -49,6 +61,13 @@ __decorate([
     __metadata("design:paramtypes", [sign_in_dto_1.SignInDto, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "signIn", null);
+__decorate([
+    (0, common_1.Post)('logout'),
+    __param(0, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "logout", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
