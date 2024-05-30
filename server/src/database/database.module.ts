@@ -13,6 +13,7 @@ import { ConfigService } from '@nestjs/config';
         password: configService.getOrThrow('MYSQL_PASSWORD'),
         database: configService.getOrThrow('MYSQL_DATABASE'),
         autoLoadEntities: true,
+        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: configService.getOrThrow('MYSQL_SYNCHRONIZE'),
       }),
       inject: [ConfigService],

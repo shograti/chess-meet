@@ -25,6 +25,7 @@ exports.DatabaseModule = DatabaseModule = __decorate([
                     password: configService.getOrThrow('MYSQL_PASSWORD'),
                     database: configService.getOrThrow('MYSQL_DATABASE'),
                     autoLoadEntities: true,
+                    entities: [__dirname + '/../**/*.entity{.ts,.js}'],
                     synchronize: configService.getOrThrow('MYSQL_SYNCHRONIZE'),
                 }),
                 inject: [config_1.ConfigService],

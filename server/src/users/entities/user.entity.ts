@@ -7,9 +7,12 @@ import {
   Unique,
   BeforeInsert,
   BeforeUpdate,
+  OneToMany,
+  ManyToMany,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Exclude } from 'class-transformer';
+import { Event } from 'src/events/entities/event.entity';
 
 @Entity()
 @Unique('UQ_USER_EMAIL', ['email'])
@@ -27,6 +30,12 @@ export class User {
   @Exclude()
   @Column({ select: false })
   password: string;
+
+  @OneToMany(() => Event, (event) => event.creator)
+  createdEvents: Event[];
+
+  @ManyToMany(() => Event, (event) => event.participants)
+  participatedEvents: Event[];
 
   @BeforeInsert()
   @BeforeUpdate()

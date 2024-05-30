@@ -11,6 +11,8 @@ export declare class UsersController {
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        createdEvents: import("../events/entities/event.entity").Event[];
+        participatedEvents: import("../events/entities/event.entity").Event[];
     }>;
     create(createUserDto: CreateUserDto): Promise<import("./entities/user.entity").User>;
     findAll(): string;

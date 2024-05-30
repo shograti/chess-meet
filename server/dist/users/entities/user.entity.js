@@ -13,6 +13,7 @@ exports.User = void 0;
 const typeorm_1 = require("typeorm");
 const bcrypt = require("bcrypt");
 const class_transformer_1 = require("class-transformer");
+const event_entity_1 = require("../../events/entities/event.entity");
 let User = class User {
     async hashPassword() {
         if (this.password) {
@@ -39,6 +40,14 @@ __decorate([
     (0, typeorm_1.Column)({ select: false }),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => event_entity_1.Event, (event) => event.creator),
+    __metadata("design:type", Array)
+], User.prototype, "createdEvents", void 0);
+__decorate([
+    (0, typeorm_1.ManyToMany)(() => event_entity_1.Event, (event) => event.participants),
+    __metadata("design:type", Array)
+], User.prototype, "participatedEvents", void 0);
 __decorate([
     (0, typeorm_1.BeforeInsert)(),
     (0, typeorm_1.BeforeUpdate)(),
